@@ -151,7 +151,7 @@ const BLESSINGS = [
   '蜡烛吹得越用力，好运来得越快哦！',
 ];
 const CANDLE_COLORS = ['#ff6b9d','#4ecdc4','#ffd166','#a78bfa','#f97316','#38bdf8','#fb7185','#34d399','#facc15','#818cf8','#f472b6','#22d3ee'];
-const THRESH = 0.15;
+const THRESH = 0.075;
 
 let litCount = 0, celebrated = false, lastAction = 0;
 let audioCtx = null, micOK = false, wind = 0, windSmooth = 0;
@@ -310,10 +310,10 @@ async function initMic(){
       } else if (wind < THRESH * .7) {
         blowSince = 0;
       }
-      if (wind > .07 && wind <= THRESH && litCount > 0) {
+      if (wind > THRESH * .6 && wind <= THRESH && litCount > 0) {
         if (!weakSince) weakSince = now;
         else if (now - weakSince > 900 && now - lastAction > 2000) setHint('💨 再用力一点吹～');
-      } else if (wind <= .07) {
+      } else if (wind <= THRESH * .6) {
         weakSince = 0;
       }
       requestAnimationFrame(tick);
