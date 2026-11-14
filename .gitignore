@@ -1,0 +1,5 @@
+node_modules/
+cloudflared.exe
+二维码.png
+*.log
+.claude/

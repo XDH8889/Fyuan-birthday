@@ -1,0 +1,13 @@
+{
+  "name": "birthday-blow",
+  "private": true,
+  "version": "1.0.0",
+  "description": "扫码吹蜡烛生日祝福页",
+  "scripts": {
+    "start": "node server.js",
+    "qr": "node genqr.js"
+  },
+  "dependencies": {
+    "qrcode": "^1.5.4"
+  }
+}
