@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<title>生日快乐 🎂</title>
+<title>方圆生日快乐 🎂</title>
 <link rel="icon" href="data:,">
 <style>
 * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
@@ -90,6 +90,8 @@ body {
 .pill { border:none; border-radius:999px; padding:13px 32px; font-size:17px; font-weight:700; color:#5b3a12; background:linear-gradient(135deg,#ffd166,#ff9f43); box-shadow:0 6px 18px rgba(255,160,60,.4); cursor:pointer; transition:transform .12s; font-family:inherit; }
 .pill:active { transform:scale(.94); }
 .pill.ghost { background:rgba(255,255,255,.14); color:#fff; box-shadow:none; border:1px solid rgba(255,255,255,.3); }
+.overlay .en { font-family:'Brush Script MT','Segoe Script','Snell Roundhand',cursive; font-style:italic; color:#ffd9a0; letter-spacing:1px; font-size:16px; }
+.cake-text { position:absolute; top:55%; left:50%; transform:translate(-50%,-50%); font-family:'Brush Script MT','Segoe Script','Snell Roundhand',cursive; font-style:italic; font-size:34px; color:rgba(255,255,255,.92); letter-spacing:3px; text-shadow:0 2px 8px rgba(0,0,0,.3); z-index:1; }
 .pop { opacity:0; animation:pop .6s forwards cubic-bezier(.2,1.6,.4,1); }
 .pop:nth-child(1){ animation-delay:.1s; } .pop:nth-child(2){ animation-delay:.3s; }
 .pop:nth-child(3){ animation-delay:.5s; } .pop:nth-child(4){ animation-delay:.7s; }
@@ -99,13 +101,13 @@ body {
 </head>
 <body>
 <div id="stars"></div>
-<div id="title">🎂 生日惊喜 🎂</div>
+<div id="title">🎂 方圆生日快乐 🎂</div>
 <div id="cake-area">
   <div id="cake-glow"></div>
   <div id="candles"></div>
   <div class="layer t"><div class="frost"></div></div>
   <div class="layer m"><div class="frost"></div></div>
-  <div class="layer b"><div class="frost"></div></div>
+  <div class="layer b"><div class="frost"></div><span class="cake-text">Fyuan</span></div>
   <div class="plate"></div>
 </div>
 <div id="hint"></div>
@@ -113,17 +115,19 @@ body {
 <canvas id="confetti"></canvas>
 
 <div id="start" class="overlay show">
-  <div class="big pop">生日快乐</div>
+  <div class="big pop">方圆生日快乐</div>
   <div class="sub pop">点亮蜡烛，对着手机吹气，把它们全部吹灭！<br>🎂 愿望就会实现哦</div>
+  <div class="sub en pop">Happy Birthday, Fyuan!</div>
   <div class="note pop">麦克风不可用时，点击蜡烛也能吹灭</div>
   <button id="btn-light" class="pill pop" style="font-size:20px; padding:16px 44px;">点亮蜡烛 🕯️</button>
 </div>
 
 <div id="overlay" class="overlay">
-  <div id="ov-title" class="big pop">🎉 生日快乐 🎉</div>
+  <div id="ov-title" class="big pop">🎉 方圆生日快乐 🎉</div>
   <div id="ov-name" class="pop"></div>
   <div id="ov-msg" class="pop"></div>
-  <div id="ov-wish" class="pop">✨ 愿望已收到，正在派送中…</div>
+  <div id="ov-en" class="pop en">Happy Birthday, Fyuan!</div>
+  <div id="ov-wish" class="pop"></div>
   <button id="btn-song" class="pill pop">🔔 播放生日歌</button>
   <button id="btn-again" class="pill ghost pop">🔄 再吹一次</button>
 </div>
@@ -132,7 +136,7 @@ body {
 'use strict';
 const $ = id => document.getElementById(id);
 const qs = new URLSearchParams(location.search);
-const NAME = (qs.get('n') || '').trim();
+const NAME = (qs.get('n') || '方圆').trim();
 const MSG = (qs.get('m') || '').trim();
 const CANDLE_COUNT = Math.min(12, Math.max(1, parseInt(qs.get('c')) || 6));
 const PREVIEW = qs.get('preview') === '1';
@@ -377,8 +381,9 @@ function celebrate(){
   if (celebrated) return;
   celebrated = true;
   startConfetti();
-  $('ov-name').textContent = NAME ? `亲爱的 ${NAME}` : '';
+  $('ov-name').textContent = `亲爱的 ${NAME}`;
   $('ov-msg').textContent = MSG || BLESSINGS[Math.floor(Math.random() * BLESSINGS.length)];
+  $('ov-wish').textContent = `✨ ${NAME} 的愿望已收到，正在派送中…`;
   $('overlay').classList.add('show');
   playSong();
 }
