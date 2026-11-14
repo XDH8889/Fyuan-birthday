@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<title>方圆生日快乐 🎂</title>
+<title>蛋黄祝方圆生日快乐 🎂</title>
 <link rel="icon" href="data:,">
 <style>
 * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
@@ -80,7 +80,7 @@ body {
 .overlay.show { opacity:1; pointer-events:auto; }
 .overlay.hide { opacity:0; pointer-events:none; }
 #start { z-index:60; }
-.big { font-size:clamp(34px,9vw,52px); font-weight:900; background:linear-gradient(180deg,#ffe9a8,#ffb25e); -webkit-background-clip:text; background-clip:text; color:transparent; filter:drop-shadow(0 2px 10px rgba(255,160,60,.35)); }
+.big { font-size:clamp(28px,7.5vw,44px); font-weight:900; background:linear-gradient(180deg,#ffe9a8,#ffb25e); -webkit-background-clip:text; background-clip:text; color:transparent; filter:drop-shadow(0 2px 10px rgba(255,160,60,.35)); }
 .overlay .sub { color:#e8ddf8; font-size:16px; text-align:center; line-height:1.7; }
 .overlay .note { color:#b9a8d8; font-size:13px; text-align:center; line-height:1.6; }
 #ov-title { text-align:center; }
@@ -101,7 +101,7 @@ body {
 </head>
 <body>
 <div id="stars"></div>
-<div id="title">🎂 方圆生日快乐 🎂</div>
+<div id="title">🎂 蛋黄祝方圆生日快乐 🎂</div>
 <div id="cake-area">
   <div id="cake-glow"></div>
   <div id="candles"></div>
@@ -115,7 +115,7 @@ body {
 <canvas id="confetti"></canvas>
 
 <div id="start" class="overlay show">
-  <div class="big pop">方圆生日快乐</div>
+  <div class="big pop">蛋黄祝方圆生日快乐</div>
   <div class="sub pop">点亮蜡烛，对着手机吹气，把它们全部吹灭！<br>🎂 愿望就会实现哦</div>
   <div class="sub en pop">Happy Birthday, Fyuan!</div>
   <div class="note pop">麦克风不可用时，点击蜡烛也能吹灭</div>
@@ -123,7 +123,7 @@ body {
 </div>
 
 <div id="overlay" class="overlay">
-  <div id="ov-title" class="big pop">🎉 方圆生日快乐 🎉</div>
+  <div id="ov-title" class="big pop">蛋黄祝方圆生日快乐</div>
   <div id="ov-name" class="pop"></div>
   <div id="ov-msg" class="pop"></div>
   <div id="ov-en" class="pop en">Happy Birthday, Fyuan!</div>
@@ -142,14 +142,7 @@ const CANDLE_COUNT = Math.min(12, Math.max(1, parseInt(qs.get('c')) || 6));
 const PREVIEW = qs.get('preview') === '1';
 const AUTO = qs.get('auto') === '1';
 
-const BLESSINGS = [
-  '愿你的每一天都像蛋糕一样甜，像烛光一样亮！',
-  '又长大一岁啦！愿新的一岁好运爆棚、烦恼清零！',
-  '祝你刚刚许下的愿望统统实现！',
-  '今天的你是全宇宙最闪耀的寿星！',
-  '愿新的一岁：钱包鼓鼓，快乐满满，烦恼通通吹走！',
-  '蜡烛吹得越用力，好运来得越快哦！',
-];
+const DEFAULT_MSG = '希望你天天开心，我一直陪着你！';
 const CANDLE_COLORS = ['#ff6b9d','#4ecdc4','#ffd166','#a78bfa','#f97316','#38bdf8','#fb7185','#34d399','#facc15','#818cf8','#f472b6','#22d3ee'];
 const THRESH = 0.03;
 
@@ -382,7 +375,7 @@ function celebrate(){
   celebrated = true;
   startConfetti();
   $('ov-name').textContent = `亲爱的 ${NAME}`;
-  $('ov-msg').textContent = MSG || BLESSINGS[Math.floor(Math.random() * BLESSINGS.length)];
+  $('ov-msg').textContent = MSG || DEFAULT_MSG;
   $('ov-wish').textContent = `✨ ${NAME} 的愿望已收到，正在派送中…`;
   $('overlay').classList.add('show');
   playSong();
